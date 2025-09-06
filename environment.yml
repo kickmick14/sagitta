@@ -1,0 +1,24 @@
+name: sagitta
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+
+  # Core scientific
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - seaborn
+
+  # ML / DS (adjust to your stack)
+  - scikit-learn
+
+  - pip:
+      - tensorflow==2.20.0
+      - tensorflow-metal==1.2.0
+      - torch
+      - optuna
+      - snakemake
