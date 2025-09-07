@@ -24,4 +24,4 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["sagitta"]
+where = ["src"]

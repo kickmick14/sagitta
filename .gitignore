@@ -1,8 +1,7 @@
-settings.yaml
 __pycache__
 __init__.py
 data
 artifiacts
 logs
 *egg-info
-settings.json
+keys.json
