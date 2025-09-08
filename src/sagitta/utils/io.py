@@ -1,5 +1,5 @@
 """
-" Functions to load files
+" Read in/out functionality
 "
 " @author: Michael Kane
 " @date:   07/09/2025
@@ -33,3 +33,4 @@ def loadJSON(
         return file
     else:
         return ImportError
+    

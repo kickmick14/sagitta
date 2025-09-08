@@ -4,7 +4,7 @@
 
 ## Installation
 ```bash
-# 1) Create and activate the conda env
+# 1) Create and activate conda env
 conda env create -f environment.yml
 conda activate sagitta
 
