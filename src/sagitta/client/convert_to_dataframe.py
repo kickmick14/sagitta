@@ -45,33 +45,3 @@ def processKlines(
         klines_df[col] = klines_df[col].astype( float )
     
     return klines_df
-
-
-def addFuturePriceColumn(
-        klines_df,
-        steps
-        ):
-    """
-    Add column to kline dataframe for the close
-    price "steps" amount in the future
-
-    E.g: for steps=1
-    Close future_price
-      0         1
-      1         2
-      2        nan
-
-    Args:
-        klines_df:
-            Kline data held in a pandas dataframe
-        steps:
-            Number of steps in the future for the future price
-    Returns:
-        klines_df:
-            Edited kline data with "future_price" column
-    """
-
-    # Build future price column
-    klines_df["future_price"] = klines_df["close"].shift( -steps )
-
-    return klines_df

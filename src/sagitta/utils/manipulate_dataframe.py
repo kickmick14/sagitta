@@ -1,12 +1,10 @@
 """
-" Functions to create indicator data from raw 
-" market dataframe
+" Dataframe manipulation functionality
 "
 " @author: Michael Kane
 " @date:   08/09/2025
 """
 import pandas as pd
-import numpy
 
 
 def subDataframe(
