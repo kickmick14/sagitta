@@ -9,28 +9,32 @@ import utils.io as io
     
 
 def fetchClient(
-        keysPath,
-        clientType
+        clientType,
+        public,
+        secret
         ):
     """
     Get binance main or test client
 
     Args:
-        keysPath:
-            Path to API keys
         clientType:
-            Test or Main client
+            Test or main client
+        public:
+            Public key to Testnet
+        secret:
+            Secret key to Testnet
     Returns:
         client:
             Binance client
     """
 
-    # Load keys
-    keys = io.loadJSON( keysPath )
+    print( " (CLIENT) Retrieving client... ")
 
     # Fetch client
-    client = Client( api_key=keys["TestKeys"]["Test_API_Key"],
-                     api_secret=keys["TestKeys"]["Test_Secret_Key"] )
+    client = Client(
+        api_key=public,
+        api_secret=secret
+        )
 
     # Configure API URL depending on client type
     if clientType == "test":
@@ -39,5 +43,7 @@ def fetchClient(
         client.API_URL = "https://api.binance.com/api"
     else:
         raise ValueError( f"Invalid client type {clientType}" )
+    
+    print(f" (CLIENT) Retrieved clientType={clientType}... ", client)
 
     return client

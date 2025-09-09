@@ -3,11 +3,8 @@
 - Currently limited to using Binance's Testnet API.
 
 ## Installation
+Create and activate conda env
 ```bash
-# 1) Create and activate conda env
 conda env create -f environment.yml
 conda activate sagitta
-
-# 2) Install package
-pip install -e .
 ```

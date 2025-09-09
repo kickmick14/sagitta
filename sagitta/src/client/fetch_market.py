@@ -5,7 +5,7 @@
 " @date:   07/09/2025
 """
 import pandas as pd
-
+from datetime import date
 
 def fetchKlineData(
         client, 
@@ -30,7 +30,11 @@ def fetchKlineData(
             Unprocessed kline information from client
     """
 
+    print( f" (CLIENT) Fetching market k-lines for... {pair} {period} on {date.today()} from {start} ago" )
+
     # Retrieve klines from binnace client
     klines = client.get_historical_klines( pair, period, start )
+
+    print( f" (CLIENT) Received k-lines" )
 
     return klines

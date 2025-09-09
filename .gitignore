@@ -5,3 +5,4 @@ artifiacts
 logs
 *.egg-info
 keys.json
+secrets

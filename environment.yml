@@ -12,6 +12,7 @@ dependencies:
   - seaborn
   - scikit-learn
   - ta-lib
+  - pyarrow
 
   - pip:
       - -e .

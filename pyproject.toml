@@ -21,8 +21,9 @@ dependencies = [
     "seaborn",
     "pyyaml",
     "python-binance",
-    "TA-Lib"
+    "TA-Lib",
+    "pyarrow"
 ]
 
 [tool.setuptools.packages.find]
-where = ["src/sagitta"]
+where = ["sagitta/src"]
