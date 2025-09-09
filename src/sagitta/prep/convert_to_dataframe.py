@@ -8,7 +8,7 @@
 import pandas as pd
 
 
-def processKlines(
+def convertKlinesToDataframe(
         klines
         ):
     """
@@ -23,7 +23,7 @@ def processKlines(
     """
 
     # Convert kline data into a pandas dataframe with these labels
-    klines_df = pd.DataFrame(
+    df = pd.DataFrame(
         klines,
         columns=[ 
             "timestamp",
@@ -40,8 +40,15 @@ def processKlines(
             "ignore" ]
             )
     
-    # Convert select columns to float type
-    for col in ["open", "high", "low", "close", "volume", "close"]:
-        klines_df[col] = klines_df[col].astype( float )
+    # Convert relevant columns from strings to float data
+    for col in ["open", "high", "low", "close", "volume", "taker_buy_base", "taker_buy_quote"]:
+        df[ col ] = df[ col ].astype( float )
+
+    # Convert relevant columns from strings to int
+    df[ "trades" ] = df[ "trades" ].astype( int )
+
+    df[ "timestamp" ]  = pd.to_datetime( df[ "timestamp" ],  unit="ms", utc=True )
+    df[ "close_time" ] = pd.to_datetime( df[ "close_time" ], unit="ms", utc=True )
+    df.drop( columns=[ "ignore" ], inplace=True )
     
-    return klines_df
+    return df

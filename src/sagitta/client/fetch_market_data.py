@@ -1,5 +1,5 @@
 """
-" Fetch candlestick (kline) data for a given pair
+" Fetch k-line (candlestick) data for a given crypto pair
 "
 " @author: Michael Kane
 " @date:   07/09/2025
@@ -7,7 +7,7 @@
 import pandas as pd
 
 
-def fetchKlines(
+def fetchKlineData(
         client, 
         pair,   
         period,

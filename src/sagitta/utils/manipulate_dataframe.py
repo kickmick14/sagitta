@@ -25,6 +25,8 @@ def subDataframe(
             A subset of 'dataframe' which has the columns as
             defined within 'features'
     """
+
+    # Loop through parent dataframe and extract all 'features'
     subDataframe = dataframe[ [ feature for feature in features ] ]
     
     return subDataframe

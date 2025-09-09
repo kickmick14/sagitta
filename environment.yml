@@ -5,18 +5,16 @@ channels:
 dependencies:
   - python=3.12
   - pip
-
-  # Core scientific
   - numpy
   - pandas
   - scipy
   - matplotlib
   - seaborn
-
-  # ML / DS (adjust to your stack)
   - scikit-learn
+  - ta-lib
 
   - pip:
+      - -e .
       - tensorflow==2.20.0
       - tensorflow-metal==1.2.0
       - torch

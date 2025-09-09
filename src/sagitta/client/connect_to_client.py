@@ -8,7 +8,7 @@ from binance.client import Client
 import utils.io as io
     
 
-def getClient(
+def fetchClient(
         keysPath,
         clientType
         ):
