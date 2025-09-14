@@ -4,10 +4,12 @@
 " @author: Michael Kane
 " @date:   07/09/2025
 """
-import json, os
 from json import JSONDecodeError
+from pandas.errors import EmptyDataError
+import pandas as pd
+import json, os, pyarrow
 
-def loadJSON(
+def load_JSON(
         path
         ):
     """
@@ -18,7 +20,7 @@ def loadJSON(
     if not os.path.exists(path):
         raise FileNotFoundError(f"File not found: {path}")
 
-    print(f" (IO) Loading {path}...", end="")
+    print(f" (IO) Loading {path}... ", end="")
 
     # Try to open...
     try:
@@ -32,11 +34,38 @@ def loadJSON(
         raise RuntimeError(f"Could not read {path}: {e}") from e
     # File returned!
     else:
-        print(" success!")
+        print("success!")
         return data
+    
 
 
-def dfToCsv(
+def load_ParquetToDf(
+        path,
+        columns=None
+        ):
+    """
+    Helper to load a Parquet file into a DataFrame.
+    """
+
+    # Check path exists
+    if not os.path.exists( path ):
+        raise FileNotFoundError( f"File not found: {path}" )
+
+    print( f" (IO) Loading {path}... ", end="" )
+
+    # Try load parquet into pd.df
+    try:
+        df = pd.read_parquet( path, columns=columns )
+    except (OSError, pyarrow.lib.ArrowInvalid) as e:
+        raise ValueError( f"Invalid or unreadable Parquet in {path}: {e}" ) from e
+    except EmptyDataError as e:
+        raise RuntimeError( f"Parquet file {path} is empty: {e}" ) from e
+    else:
+        print( "success!" )
+        return df
+
+
+def save_DfToCsv(
         df,
         name,
         index=False
@@ -52,7 +81,7 @@ def dfToCsv(
     # Add suffix
     name = name + '.csv'
 
-    print(f" (IO) Saving {name}...", end="")
+    print(f" (IO) Saving {name}... ", end="")
 
     # Try to save .csv
     try:
@@ -62,10 +91,10 @@ def dfToCsv(
         raise RuntimeError(f"Failed to save DataFrame to {name}") from e
     # Else success...
     else:
-        print(" success!")
+        print("success!")
 
 
-def dfToParquet(
+def save_DfToParquet(
         df,
         name,
         engine="pyarrow",
@@ -82,7 +111,7 @@ def dfToParquet(
     # Add suffix
     name = name + '.parquet'
 
-    print(f" (IO) Saving {name} using {engine}...", end="")
+    print(f" (IO) Saving {name} using {engine}... ", end="")
 
     # Try to save .csv
     try:
@@ -92,4 +121,4 @@ def dfToParquet(
         raise RuntimeError(f"Failed to save DataFrame to {name}") from e
     # Else success...
     else:
-        print(" success!")
+        print("success!")

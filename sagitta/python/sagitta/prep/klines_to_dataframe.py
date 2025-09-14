@@ -12,7 +12,7 @@ def convertKlinesToDataframe(
         klines
         ):
     """
-    Process kline data into pandas dataframe
+    Process raw kline data into pandas dataframe
 
     Args:
         klines:
@@ -22,11 +22,13 @@ def convertKlinesToDataframe(
             Kline data in pandas dataframe
     """
 
+    print( f' (PREP) Converting raw binance data to pandas df... ', end="" )
+
     # Convert kline data into a pandas dataframe with these labels
     df = pd.DataFrame(
         klines,
         columns=[ 
-            "timestamp",
+            "open_time",
             "open",
             "high",
             "low",
@@ -34,21 +36,13 @@ def convertKlinesToDataframe(
             "volume", 
             "close_time",
             "quote_asset_volume",
-            "trades", 
+            "number_of_trades", 
             "taker_buy_base",
             "taker_buy_quote",
             "ignore" ]
             )
     
-    # Convert relevant columns from strings to float data
-    for col in ["open", "high", "low", "close", "volume", "taker_buy_base", "taker_buy_quote"]:
-        df[ col ] = df[ col ].astype( float )
-
-    # Convert relevant columns from strings to int
-    df[ "trades" ] = df[ "trades" ].astype( int )
-
-    df[ "timestamp" ]  = pd.to_datetime( df[ "timestamp" ],  unit="ms", utc=True )
-    df[ "close_time" ] = pd.to_datetime( df[ "close_time" ], unit="ms", utc=True )
+    # Drop the ignore column
     df.drop( columns=[ "ignore" ], inplace=True )
     
     return df

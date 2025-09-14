@@ -29,7 +29,7 @@ def fetchClient(
             Binance client
     """
 
-    print( f" (CLIENT) Retrieving clientType {clientType}... ", end="")
+    print( f" ( CLIENT ) Retrieving clientType {clientType}... ", end="")
 
     # Fetch client
     client = Client(

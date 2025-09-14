@@ -1,5 +1,5 @@
 """
-" Script to fetch and build market kline dataframe
+" Script to fetch and build raw market dataframe
 "
 " @author: Michael Kane
 " @date:   09/09/2025
@@ -50,10 +50,10 @@ def main():
     klines_df   = klines_to_dataframe.convertKlinesToDataframe( klines )
 
     # As CSV
-    io.dfToCsv( klines_df, args.save_name )
+    io.load_DfToCsv( klines_df, args.save_name )
 
     # As parquet
-    io.dfToParquet( klines_df, args.save_name )
+    io.load_DfToParquet( klines_df, args.save_name )
 
 
 if __name__ == "__main__":
