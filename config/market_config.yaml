@@ -1,0 +1,8 @@
+# Paths for workflow
+keys_path: "config/secrets/keys.json"
+out_dir:   "data/raw"
+
+# Define market to fetch
+pair:   "ETHUSDT"
+period: "1h"
+start:  "720d"

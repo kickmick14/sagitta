@@ -4,8 +4,9 @@
 " @author: Michael Kane
 " @date:   07/09/2025
 """
-from binance.client import Client
+import sys
 import utils.io as io
+from binance.client import Client
     
 
 def fetchClient(
@@ -28,12 +29,12 @@ def fetchClient(
             Binance client
     """
 
-    print( " (CLIENT) Retrieving client... ")
+    print( f" (CLIENT) Retrieving clientType {clientType}... ", end="")
 
     # Fetch client
     client = Client(
-        api_key=public,
-        api_secret=secret
+        api_key    = public,
+        api_secret = secret
         )
 
     # Configure API URL depending on client type
@@ -42,8 +43,8 @@ def fetchClient(
     elif clientType == "main":
         client.API_URL = "https://api.binance.com/api"
     else:
-        raise ValueError( f"Invalid client type {clientType}" )
+        raise ValueError( f"Invalid client type {clientType}", file=sys.stderr )
     
-    print(f" (CLIENT) Retrieved clientType={clientType}... ", client)
+    print( f"success!" )
 
     return client

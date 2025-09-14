@@ -22,15 +22,13 @@ def loadJSON(
 
     # Try to open...
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, "r") as f:
             data = json.load(f)
     # Check JSON decodes...
     except JSONDecodeError as e:
-        print(" failed!")
         raise ValueError(f"Invalid JSON in {path}: {e}") from e
     # Check readable...
     except OSError as e:
-        print(" failed!")
         raise RuntimeError(f"Could not read {path}: {e}") from e
     # File returned!
     else:
@@ -40,7 +38,7 @@ def loadJSON(
 
 def dfToCsv(
         df,
-        path,
+        name,
         index=False
         ):
     """
@@ -48,21 +46,20 @@ def dfToCsv(
     """
 
     # Cautionary check of file name
-    if path.endswith(".csv"):
-        path = path[:4]
+    if name.endswith(".csv"):
+        name = name[:4]
 
     # Add suffix
-    path = path + ".csv"
+    name = name + '.csv'
 
-    print(f" (IO) Saving {path}...", end="")
+    print(f" (IO) Saving {name}...", end="")
 
     # Try to save .csv
     try:
-        df.to_csv(path, index=index)
+        df.to_csv(name, index=index)
     # If fails...
     except Exception as e:
-        print(" failed!")
-        raise RuntimeError(f"Failed to save DataFrame to {path}") from e
+        raise RuntimeError(f"Failed to save DataFrame to {name}") from e
     # Else success...
     else:
         print(" success!")
@@ -70,7 +67,7 @@ def dfToCsv(
 
 def dfToParquet(
         df,
-        path,
+        name,
         engine="pyarrow",
         index=False
         ):
@@ -79,21 +76,20 @@ def dfToParquet(
     """
 
     # Cautionary check of file name
-    if path.endswith(".parquet"):
-        path = path[:8]
+    if name.endswith(".parquet"):
+        name = name[:8]
 
     # Add suffix
-    path = path + ".parquet"
+    name = name + '.parquet'
 
-    print(f" (IO) Saving {path} using {engine}...", end="")
+    print(f" (IO) Saving {name} using {engine}...", end="")
 
     # Try to save .csv
     try:
-        df.to_parquet( path, engine=engine, index=index )
+        df.to_parquet( name, engine=engine, index=index )
     # If fails...
     except Exception as e:
-        print(" failed!")
-        raise RuntimeError(f"Failed to save DataFrame to {path}") from e
+        raise RuntimeError(f"Failed to save DataFrame to {name}") from e
     # Else success...
     else:
         print(" success!")

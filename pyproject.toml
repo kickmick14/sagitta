@@ -26,4 +26,4 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["sagitta/src/python"]
+where = ["sagitta/python/sagitta"]
