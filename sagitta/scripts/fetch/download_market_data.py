@@ -37,6 +37,8 @@ main_client = fetch_client.fetchClient( clientType='main', public=test_public, s
 pair        = 'ETHUSDT'
 period      = '1h'
 start       = '720d'
+
+# Get data for save name
 today       = date.today()
 save_name   = f'{pair}_{period}_{start}_{today}'
 

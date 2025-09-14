@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sagitta"
-version = "0.1.0"
+version = "0.2.0"
 description = "An ML-based cryptocurrency analysis and trading workflow"
 authors = [
     { name = "Michael Kane", email = "michaelkane14@icloud.com" }
@@ -26,4 +26,4 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["sagitta/src"]
+where = ["sagitta/src/python"]
