@@ -9,6 +9,7 @@ from pandas.errors import EmptyDataError
 import pandas as pd
 import json, os, pyarrow
 
+
 def load_JSON(
         path
         ):
@@ -20,7 +21,7 @@ def load_JSON(
     if not os.path.exists(path):
         raise FileNotFoundError(f"File not found: {path}")
 
-    print(f" (IO) Loading {path}... ", end="")
+    print(f" [IO] Loading {path}... ", end="")
 
     # Try to open...
     try:
@@ -51,7 +52,7 @@ def load_ParquetToDf(
     if not os.path.exists( path ):
         raise FileNotFoundError( f"File not found: {path}" )
 
-    print( f" (IO) Loading {path}... ", end="" )
+    print( f" [IO] Loading {path}... ", end="" )
 
     # Try load parquet into pd.df
     try:
@@ -81,7 +82,7 @@ def save_DfToCsv(
     # Add suffix
     name = name + '.csv'
 
-    print(f" (IO) Saving {name}... ", end="")
+    print(f" [IO] Saving {name}... ", end="")
 
     # Try to save .csv
     try:
@@ -111,7 +112,7 @@ def save_DfToParquet(
     # Add suffix
     name = name + '.parquet'
 
-    print(f" (IO) Saving {name} using {engine}... ", end="")
+    print(f" [IO] Saving {name} using {engine}... ", end="")
 
     # Try to save .csv
     try:

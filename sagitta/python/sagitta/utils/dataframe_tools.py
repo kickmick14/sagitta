@@ -4,7 +4,6 @@
 " @author: Michael Kane
 " @date:   08/09/2025
 """
-import pandas as pd
 
 
 def subDataframe(
@@ -26,7 +25,5 @@ def subDataframe(
             defined within 'features'
     """
 
-    # Loop through parent dataframe and extract all 'features'
-    subDataframe = dataframe[ [ feature for feature in features ] ]
-    
-    return subDataframe
+    # Loop through parent dataframe and extract all columns in 'features'
+    return dataframe[ [ feature for feature in features ] ]

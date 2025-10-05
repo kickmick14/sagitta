@@ -22,7 +22,7 @@ def convertKlinesToDataframe(
             Kline data in pandas dataframe
     """
 
-    print( f' (PREP) Converting raw binance data to pandas df... ', end="" )
+    print( f' [PREP] Converting raw binance data to pandas df... ', end="" )
 
     # Convert kline data into a pandas dataframe with these labels
     df = pd.DataFrame(
@@ -44,5 +44,7 @@ def convertKlinesToDataframe(
     
     # Drop the ignore column
     df.drop( columns=[ "ignore" ], inplace=True )
+
+    print("success!")
     
     return df

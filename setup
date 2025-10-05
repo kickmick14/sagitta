@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Creates required directories and placeholder files
+
+set -euo pipefail
+
+# Project root = directory of this script
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# Set 
+ENV_NAME="sagitta"
+ENV_PATH="$(conda info --base)/envs/$ENV_NAME"
+
+# Setup conda environment
+conda env create -f environment.yml
+
+echo " [INIT] Setting up project directories under $ROOT"
+
+# Directories to ensure exist
+dirs=(
+  "$ROOT/artifacts/models"
+  "$ROOT/artifacts/plots"
+  "$ROOT/artifacts/reports"  
+  "$ROOT/config/secrets"
+  "$ROOT/data/raw"
+  "$ROOT/data/processed"
+  "$ROOT/data/interim"
+  "$ROOT/logs"
+)
+
+for d in "${dirs[@]}"; do
+  if [ ! -d "$d" ]; then
+    echo "  + Creating $d"
+    mkdir -p "$d"
+  else
+    echo "  = Exists $d"
+  fi
+done
+
+# List of environmental variables
+env_vars=(
+  "SAGITTA_REPO_ROOT=$ROOT"
+  "SAGITTA_PACKAGE_ROOT=$ROOT/sagitta/python/sagitta"
+  "SAGITTA_RAW_DATA_DIR=$ROOT/data/raw"
+  "SAGITTA_PROCESSED_DATA_DIR=$ROOT/data/processed"
+  "SAGITTA_INTERIM_DATA_DIR=$ROOT/data/interim"
+)
+
+echo " [INIT] Writing environment variables into $ROOT/.env and $ENV_PATH/etc/conda/activate.d (deactivate.d also set)"
+
+# Install conda activate/deactivate hooks
+mkdir -p "$ENV_PATH/etc/conda/activate.d" "$ENV_PATH/etc/conda/deactivate.d"
+
+# Loop through the env vars and set for export in the activation list
+for var in "${env_vars[@]}"; do
+  echo "$var" >> "$ROOT/.env"
+  echo "export $var" >> "$ENV_PATH/etc/conda/activate.d/sagitta_env.sh"
+
+  # Extract KEY from KEY=VALUE
+  name="${var%%=*}"
+  echo "unset $name" >> "$ENV_PATH/etc/conda/deactivate.d/sagitta_env.sh"
+done
+
+echo "[INIT] Done!"

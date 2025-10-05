@@ -73,7 +73,7 @@ def dropDupes(
     after = len(deduped) 
     dropped = before - after
 
-    print( f" (CLEAN) Dropped {dropped} duplicate rows based on time index." )
+    print( f" [CLEAN] Dropped {dropped} duplicate rows based on time index." )
 
     return deduped
 
@@ -109,7 +109,7 @@ def checkOHLC(
     df[ "high" ] = np.where( df["high"] < max_oc, max_oc, df["high"] )
     df[ "low" ]  = np.where( df["low"]  > min_oc, min_oc, df["low"] )
 
-    print( f' (CLEAN) OHLC check - HL swapped: {n_swap}, Clamped highs: {n_high_fix}, Clamped lows: {n_low_fix}' )
+    print( f' [CLEAN] OHLC check - HL swapped: {n_swap}, Clamped highs: {n_high_fix}, Clamped lows: {n_low_fix}' )
 
     return df
 
@@ -133,7 +133,7 @@ def removeNegsAndNaNs(
     after_nan = len(df_nan)
     dropped_nan = before - after_nan
 
-    print(f" (CLEAN) Dropped {dropped_nan} rows with NaNs.")
+    print(f" [CLEAN] Dropped {dropped_nan} rows with NaNs.")
 
     # For logging
     before_ohlc = after_nan
@@ -149,7 +149,7 @@ def removeNegsAndNaNs(
     after_ohlc = len(df_ohlc)
     dropped_ohlc = before_ohlc - after_ohlc
 
-    print(f" (CLEAN) Dropped {dropped_ohlc} rows with negative OHLC values.")
+    print(f" [CLEAN] Dropped {dropped_ohlc} rows with negative OHLC values.")
 
     # Remove negative volumes
     before_vol = after_ohlc
@@ -162,6 +162,6 @@ def removeNegsAndNaNs(
     after_vol = len(df_vol)
     dropped_vol = before_vol - after_vol
 
-    print(f" (CLEAN) Removing negatives and NaNs - NaN dropped: {dropped_nan}, Negative OHLC dropped: {dropped_ohlc}, Negative volume dropped: {dropped_vol}, Total remaining: {after_vol}" )
+    print(f" [CLEAN] Removing negatives and NaNs - NaN dropped: {dropped_nan}, Negative OHLC dropped: {dropped_ohlc}, Negative volume dropped: {dropped_vol}, Total remaining: {after_vol}" )
 
     return df_vol

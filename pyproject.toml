@@ -22,8 +22,10 @@ dependencies = [
     "pyyaml",
     "python-binance",
     "TA-Lib",
-    "pyarrow"
+    "pyarrow",
+    "python-dotenv"
 ]
 
 [tool.setuptools.packages.find]
-where = ["sagitta/python/sagitta"]
+where = ["sagitta/python"]
+include = ["sagitta*"]

@@ -5,7 +5,6 @@
 " @date:   07/09/2025
 """
 import sys
-import utils.io as io
 from binance.client import Client
     
 
@@ -29,7 +28,7 @@ def fetchClient(
             Binance client
     """
 
-    print( f" ( CLIENT ) Retrieving clientType {clientType}... ", end="")
+    print( f" [CLIENT] Retrieving clientType {clientType}... ", end="")
 
     # Fetch client
     client = Client(

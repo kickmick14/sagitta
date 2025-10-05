@@ -1,7 +1,6 @@
 __pycache__
-__init__.py
 data
-artifiacts
+/artifiacts/*
 logs
 *.egg-info
 keys.json

@@ -5,18 +5,19 @@
 " @date:   09/09/2025
 """
 import argparse, sys
-from client import (
+from sagitta.client import (
     fetch_client,
     fetch_market
 )
-from prep import (
+from sagitta.prep import (
     klines_to_dataframe
 )
-from utils import (
+from sagitta.utils import (
     io
 )
 
 
+# Pass as function
 def main():
 
     # Create parser
@@ -33,7 +34,7 @@ def main():
     args   = parser.parse_args()
 
     # Load json holding them
-    keys   = io.loadJSON( args.keys_path )[ 'test_keys' ]
+    keys   = io.load_JSON( args.keys_path )[ 'test_keys' ]
 
     # Get public and secret keys for Testnet
     public = keys['public']
@@ -50,11 +51,12 @@ def main():
     klines_df   = klines_to_dataframe.convertKlinesToDataframe( klines )
 
     # As CSV
-    io.load_DfToCsv( klines_df, args.save_name )
+    io.save_DfToCsv( klines_df, args.save_name )
 
     # As parquet
-    io.load_DfToParquet( klines_df, args.save_name )
+    io.save_DfToParquet( klines_df, args.save_name )
 
 
+# Return exit code posrt execute it
 if __name__ == "__main__":
     sys.exit( main() )

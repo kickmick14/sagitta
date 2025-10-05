@@ -22,3 +22,4 @@ dependencies:
       - optuna
       - snakemake
       - python-binance
+      - python-dotenv

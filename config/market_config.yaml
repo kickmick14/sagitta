@@ -1,8 +1,10 @@
 # Paths for workflow
-keys_path: "config/secrets/keys.json"
-out_dir:   "data/raw"
+paths:
+  keys_path:       "config/secrets/keys.json"
+  download_script: "workflow/scripts/fetch/download_market_test_data.py"
 
 # Define market to fetch
-pair:   "ETHUSDT"
-period: "1h"
-start:  "720d"
+client:
+  pair:   "ETHUSDT"
+  period: "1h"
+  start:  "720d"
